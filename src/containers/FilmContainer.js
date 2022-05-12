@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import DisplayFilm from '../components/DisplayFilm';
 import FavouriteList from '../components/FavouriteList';
+import DisplayFilm from '../components/DisplayFilm';
+
 import FilmDetail from '../components/FilmDetail';
+
 
 const FilmContainer = () => {
 
     const [films, setFilms] = useState([]);
     const [selectedFilm, setSelectedFilm] = useState (null)
+    const [favouriteFilms, setFavouriteFilm] = useState([])
 
     useEffect (() => {
         loadFilms();
@@ -24,6 +27,15 @@ const FilmContainer = () => {
         setSelectedFilm(film)
     }
 
+    const onFavouriteClick = function (film){
+        const copyOfFavouriteFilms = [...favouriteFilms, film]
+        setFavouriteFilm(copyOfFavouriteFilms)
+    }
+
+    const onFilmSelected = function (film) {
+        setSelectedFilm(film)
+    }
+
     return (
     
         <>
@@ -31,6 +43,7 @@ const FilmContainer = () => {
         {selectedFilm ? <FilmDetail selectedFilm={selectedFilm}/> : null}
         <div className="films-list">
         <DisplayFilm films={films} onFilmClick={onFilmClick}/>
+        <FavouriteList films={films} onFavouriteClick={onFavouriteClick}/>
         </div>
         
     
