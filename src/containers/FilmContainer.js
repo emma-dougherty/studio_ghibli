@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import DisplayFilm from '../components/DisplayFilm';
 import FavouriteList from '../components/FavouriteList';
+import FilmDetail from '../components/FilmDetail';
 
 const FilmContainer = () => {
 
     const [films, setFilms] = useState([]);
+    const [selectedFilm, setSelectedFilm] = useState (null)
 
     useEffect (() => {
         loadFilms();
@@ -18,10 +20,20 @@ const FilmContainer = () => {
 
     }
 
+    const onFilmClick = function (film){
+        setSelectedFilm(film)
+    }
+
     return (
+    
         <>
         <h1>Studio Ghibli Films</h1>
-        <DisplayFilm films={films}/>
+        {selectedFilm ? <FilmDetail selectedFilm={selectedFilm}/> : null}
+        <div className="films-list">
+        <DisplayFilm films={films} onFilmClick={onFilmClick}/>
+        </div>
+        
+    
         </>
     )
 }

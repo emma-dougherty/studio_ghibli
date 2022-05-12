@@ -1,12 +1,16 @@
 import React from 'react';
 
-const Film = ({film, index}) => {
+const Film = ({film, onFilmClick}) => {
+
+    const handleClick = function() {
+        onFilmClick(film)
+    }
 
     return (
         <>
-        <li>{film.title} </li>
-        <li key={index}><img id="filmImage" src={film.image}/></li>
-        
+        <ul>
+        <li className='film-container'onClick={handleClick}>{film.title} <img id="filmImage" src={film.image}></img> </li>
+        </ul>
         </>
     )
 }
